@@ -1,0 +1,39 @@
+Resources:
+  CognitoUserPoolAccountsUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      # Generate a name based on the stage
+      UserPoolName: {self:custom.stage}-account-user-pool
+      # Set email as an alias
+      UsernameAttributes:
+        - email
+      AutoVerifiedAttributes:
+        - email
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 8
+          RequireLowercase: false
+          RequireNumbers: false
+          RequireSymbols: false
+          RequireUppercase: false
+      Schema:
+        - AttributeDataType: String
+          Name: accountId
+
+  AccountsUserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      # Generate an app client name based on the stage
+      ClientName: ${self:custom.stage}-accounts-user-pool-client
+      UserPoolId:
+        Ref: CognitoUserPoolAccountsUserPool
+      GenerateSecret: false
+
+# Print out the Id of the User Pool that is created
+Outputs:
+  AccountsUserPoolId:
+    Value:
+      Ref: CognitoUserPoolAccountsUserPool
+  AccountsUserPoolClientId:
+    Value:
+      Ref: AccountssUserPoolClient

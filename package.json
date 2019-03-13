@@ -1,0 +1,12 @@
+{
+  "name": "lipo-infrastructure",
+  "description": "",
+  "version": "0.1.0",
+  "dependencies": {
+    "aws-sdk": "^2.418.0"
+  },
+  "devDependencies": {
+    "serverless-export-env": "^1.2.0",
+    "serverless-iam-roles-per-function": "^1.0.4"
+  }
+}
